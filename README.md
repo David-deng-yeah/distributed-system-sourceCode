@@ -79,6 +79,42 @@ then implement function MakeCoordinator
 * create a coordinator
 * mrcoordinator calls this function, and nReduce is the number of reduce tasks to use
 
+## work.go
+
+it define several functions:
+* ihash: generate a hashKey (int)
+* Worker: 
+* CallExample
+* call: 
+  * send an RPC request to the coordinator, wait for the response
+  * usually returns true
+  * returns false if something goes wrong
+
+## rpc.go
+
+first is the defination of the structure of RPC
+
+and then it mainly defines a function coordinatorSock(), which is used to cook up a unique-ish Unix domain socket name in /var/tmp, for the coordinator 
+
+
+# the process of finishing this lab
+
+## RPC communication between Coordinator and worker
+in file mr/rpc.go
+
+## the schedule of Coordinator
+in file mr/coordinator.go
+
+what should coordinator do
+* pass specific parameter: num of files and num of reduce task to generate Map task and Reduce task
+* respond to the apply of Worker through RPC, distributing task to workder
+* track the cpmpletion of the task(if task haven't been finished by a worker for over 10s, reassign this task in another worker)(and this will result in condition that two worker conduct same tasks, in this case, what we should do is ensure that only one worker can write the result into intermediate file), come into Reduce phase after all map task finishing, and the same as reduce tasks
+
+
+
+## the calculation logic of Worker
+
+
 
 
 
